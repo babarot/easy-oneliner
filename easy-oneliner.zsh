@@ -1,5 +1,8 @@
 #!/bin/zsh
 
+[[ -n $ZSH_VERSION ]] || return
+(( $+commands[fzf] )) || return
+
 : ${EASY_ONE_REFFILE:="${0:A:h}/easy-oneliner.txt"}
 : ${EASY_ONE_KEYBIND:="^x^x"}
 
