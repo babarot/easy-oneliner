@@ -51,7 +51,7 @@ easy-oneliner() {
     zle redisplay
 }
 zle -N easy-oneliner
-bindkey $EASY_ONE_REFFILE easy-oneliner
+bindkey $EASY_ONE_KEYBIND easy-oneliner
 
 export EASY_ONE_REFFILE
 export EASY_ONE_KEYBIND
