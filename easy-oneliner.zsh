@@ -30,7 +30,15 @@ easy-oneliner() {
         res="$(sed '1,2d;/^$/d;s/[[:blank:]]#.*$//' <<< "$cmd")"
         [ -z "$res" ] && continue
         if [ "$k" = "ctrl-v" ]; then
-            vim "$file" < /dev/tty > /dev/tty
+            local ed
+            if [ -n "$VISUAL" ]; then
+                ed="$VISUAL"
+            elif [ -n "$EDITOR" ]; then
+                ed="$EDITOR"
+            else
+                ed="vim"
+            fi
+            $ed "$file" < /dev/tty > /dev/tty
         else
             cmd="$(perl -pe 's/^(\[.*?\])\t(.*)$/$2/' <<<"$res")"
             if [[ $cmd =~ "!$" || $cmd =~ "! *#.*$" ]]; then
