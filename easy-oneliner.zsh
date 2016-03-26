@@ -5,6 +5,7 @@
 
 : ${EASY_ONE_REFFILE:="${0:A:h}/easy-oneliner.txt"}
 : ${EASY_ONE_KEYBIND:="^x^x"}
+: ${EASY_ONE_FZF_OPTS:="--no-sort --tac"}
 
 easy-oneliner() {
     local file
@@ -22,7 +23,7 @@ easy-oneliner() {
             | perl -pe 's/^(.*)([[:blank:]]#[[:blank:]]?.*)$/$1\033[30;1m$2\033[m/' \
             | perl -pe 's/(!)/\033[31;1m$1\033[m/' \
             | perl -pe 's/(\|| [A-Z]+ [A-Z]+| [A-Z]+ )/\033[35;1m$1\033[m/g' \
-            | fzf --ansi --multi --no-sort --tac --query="$q" \
+            | fzf ${=EASY_ONE_FZF_OPTS} --ansi --multi --query="$q" \
             --print-query --expect=ctrl-v --exit-0
             )"; do
         q="$(head -1 <<< "$cmd")"
@@ -66,3 +67,4 @@ bindkey $EASY_ONE_KEYBIND easy-oneliner
 
 export EASY_ONE_REFFILE
 export EASY_ONE_KEYBIND
+export EASY_ONE_FZF_OPTS
