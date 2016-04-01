@@ -8,6 +8,8 @@ Type `C-x C-x` on your command-line.
 
 ## Installation
 
+By using [zplug](https://github.com/b4b4r07/zplug), it's possible to easily install this:
+
 ```zsh
 # Install easy-oneliner (If fzf is already installed)
 zplug "b4b4r07/easy-oneliner", if:"which fzf"
